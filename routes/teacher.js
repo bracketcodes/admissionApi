@@ -17,7 +17,15 @@ router.post('/add',(req,res)=>{
      else res.send(data)
  })
 });
-
+router.get('/getList',(req,res)=>{
+    teacherModel.find()
+    .exec((err,data)=>{
+        if(err){res.json({msg:err});}
+        else{
+        res.json(data)
+        }
+    })
+})
 // allocating teacher
 router.post('/allocate/:teacher_id',(req,res)=>{
     if(Object.keys(req.body).length){

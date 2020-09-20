@@ -9,15 +9,15 @@ var Student = new mongoose.Schema({
   percentage:{type:String},
   Count:{type:Number,default:0},
   CreatedAt : {type:Date,default:Date.now},
-  Message:Array,
+  Message:{type:Array,default:[]},
   callduration:String,
   current_teacher:{type:String,default:"000000000000000000000000"},
-  Catagory_history:Array,
+  Catagory_history:{type:Array,default:[]},
   lastcall:Date,
   Status:Number,
   total_call_count:Number,
-  teacher_feedback:Array,
-  allocateted_teacher:Array
+  teacher_feedback:{type:Array,default:[]},
+  allocateted_teacher:{type:Array,default:[]}
 });
 
 // Delete model definition in case it is already defined
