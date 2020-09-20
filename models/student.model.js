@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-// 0=>initiate 1 => accept ; 2 => modrate ; 3 => reject
+// 0=>initiate 1 => accept ; 2 => modrate ; 3 => reject; 4 => intrested
 // teacher response 
 var Student = new mongoose.Schema({
   Name:String,
@@ -14,7 +14,7 @@ var Student = new mongoose.Schema({
   current_teacher:{type:String,default:"000000000000000000000000"},
   Catagory_history:{type:Array,default:[]},
   lastcall:Date,
-  Status:Number,
+  Status:{type:Number,default:0},
   total_call_count:Number,
   teacher_feedback:{type:Array,default:[]},
   allocateted_teacher:{type:Array,default:[]}

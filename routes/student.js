@@ -79,6 +79,7 @@ router.get('/updateInfo/:student_id',(req,res)=>{
 
     (req.body.Message) ? pushoptions['Message'] = req.body.Message : console.log("no message");
     (req.body.teacher_feedback) ? pushoptions['teacher_feedback'] = req.body.teacher_feedback : console.log("no message");
+    (req.body.Catagory) ? setOption['Catagory_history'] = req.body.Catagory : console.log("no Catagory")
 
     (req.body.current_teacher && req.body.current_teacher != "000000000000000000000000") ? pushoptions['allocateted_teacher'] = req.body.current_teacher : console.log("no Catagory")
 
