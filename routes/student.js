@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const config = require('../config');
 
 
-router.post('/add',(err,data)=>{
+router.post('/add',(req,res)=>{
     if(err) res.send(err)
     else res.send(data)
 });
