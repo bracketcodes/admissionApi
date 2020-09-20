@@ -43,7 +43,7 @@ router.get('/getList/:teacher_id',(req,res)=>{
     })
 });
 
-router.get('/list/:type',(err,data)=>{
+router.get('/list/:type',(req,res)=>{
     if(err) {res.send(err)}
     else{
         // 0 => unallocate 1 => allocate
