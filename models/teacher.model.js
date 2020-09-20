@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 
 var Teacher = new mongoose.Schema({
   Name:String,
-  PhoneNumber: String,
+  PhoneNumber: {type:String,unique:true},
+  password:String,
   Catagory: String,
   Count:String,
   CreatedAt : Date,
   lastcallat:Date,
-
   cureent_allocate_teacher:String,
   allocateted_teachers:Array
 });

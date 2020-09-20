@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+// 1 => accept ; 2 => modrate ; 3 => reject
+// teacher response 
 var Student = new mongoose.Schema({
   Name:String,
   PhoneNumber: String,
@@ -12,7 +14,9 @@ var Student = new mongoose.Schema({
   current_teacher:String,
   Catagory_history:Array,
   lastcall:Date,
+  Stuatus:Number,
   total_call_count:Number,
+  teacher_feedback:Array,
   allocateted_teacher:Array
 });
 
