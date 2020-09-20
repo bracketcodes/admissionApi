@@ -61,13 +61,37 @@ router.get('/list/:type',(req,res)=>{
 });
 
 router.get('/updateInfo/:student_id',(req,res)=>{
-    studentModel.findByIdAndUpdate({_id:req.params.student_id},{$set:req.body})
+   if(Object.Keys(req.body).length){
+
+    let pushoptions = {};
+    let setOption = {};
+
+
+    (req.body.Catagory) ? setOption['Catagory'] = req.body.Catagory : console.log("no Catagory")
+    (req.body.callduration) ? setOption['callduration'] = req.body.callduration : console.log("no Catagory")
+    (req.body.lastcall) ? setOption['lastcall'] = req.body.lastcall : console.log("no Catagory")
+    (req.body.Status) ? setOption['Status'] = req.body.Status : console.log("no Catagory");
+    (req.body.current_teacher) ? setOption['current_teacher'] = req.body.current_teacher : console.log("no Catagory")
+
+
+
+
+
+    (req.body.Message) ? pushoptions['Message'] = req.body.Message : console.log("no message");
+    (req.body.teacher_feedback) ? pushoptions['teacher_feedback'] = req.body.teacher_feedback : console.log("no message");
+
+    (req.body.current_teacher && req.body.current_teacher != "000000000000000000000000") ? pushoptions['allocateted_teacher'] = req.body.current_teacher : console.log("no Catagory")
+
+    studentModel.findOneAndUpdate({ "_id": mongoose.Types.ObjectId(req.params.student_id) }, { $set: setoptions, $push: pushoptions },{ $inc: { Count:1} })
+
+    // studentModel.findByIdAndUpdate({_id:req.params.student_id},{$set:req.body})
     .exec((err,data)=>{
         if(err){res.json({msg:err});}
         else{
         res.json(data)
         }
     })
+}
 });
 
 
