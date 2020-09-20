@@ -11,8 +11,11 @@ const config = require('../config');
 
 
 router.post('/add',(req,res)=>{
-    if(err) res.send(err)
-    else res.send(data)
+    let studentmodel = new studentModel(req.body)
+    studentmodel.save((err,data)=>{
+     if(err) res.send(err)
+     else res.send(data)
+ })
 });
 
 // allocating teacher
