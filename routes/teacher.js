@@ -18,6 +18,13 @@ const config = require('../config');
 //   })
 // })
 
+router.post('/add',(req,res)=>{
+    let techerModel = new teacherModel(req.body)
+    techerModel.save((err,data)=>{
+     if(err) res.send(err)
+     else res.send(data)
+ })
+})
 
 // allocating teacher
 router.post('/allocate/:teacher_id',(req,res)=>{
