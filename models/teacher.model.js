@@ -6,7 +6,7 @@ var Teacher = new mongoose.Schema({
   password:String,
   Catagory: String,
   Count:String,
-  CreatedAt : Date,
+  CreatedAt : {type:Date,default:Date.now},
   lastcallat:Date,
   cureent_allocate_teacher:String,
   allocateted_teachers:Array

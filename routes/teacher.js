@@ -9,14 +9,6 @@ const mongoose = require('mongoose');
 
 const config = require('../config');
 
-// POST /calls/connect
-// router.get('/list',(req,res)=>{
-//   Ticket.find({})
-//   .exec((err,data)=>{
-//     if(err)res.status(500).send(err)
-//     else res.json({"status":1,'msg':"List of candidates",data:data})
-//   })
-// })
 
 router.post('/add',(req,res)=>{
     let techerModel = new teacherModel(req.body)
@@ -24,7 +16,7 @@ router.post('/add',(req,res)=>{
      if(err) res.send(err)
      else res.send(data)
  })
-})
+});
 
 // allocating teacher
 router.post('/allocate/:teacher_id',(req,res)=>{
