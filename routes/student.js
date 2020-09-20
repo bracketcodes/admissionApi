@@ -71,7 +71,9 @@ router.get('/updateInfo/:student_id',(req,res)=>{
     (req.body.callduration) ? setOption['callduration'] = req.body.callduration : console.log("no Catagory")
     (req.body.lastcall) ? setOption['lastcall'] = req.body.lastcall : console.log("no Catagory")
     (req.body.Status) ? setOption['Status'] = req.body.Status : console.log("no Catagory");
-    (req.body.current_teacher) ? setOption['current_teacher'] = req.body.current_teacher : console.log("no Catagory")
+    (req.body.isConvertable) ? setOption['isConvertable'] = req.body.isConvertable : console.log("no Catagory");
+
+    // (req.body.current_teacher) ? setOption['current_teacher'] = req.body.current_teacher : console.log("no Catagory")
 
 
 

@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 
 // 0=>initiate 1 => accept ; 2 => modrate ; 3 => reject; 4 => intrested
-// teacher response 
+// teacher response
+// 1 => yes 0 => no 
 var Student = new mongoose.Schema({
   Name:String,
   PhoneNumber: String,
@@ -16,6 +17,7 @@ var Student = new mongoose.Schema({
   lastcall:Date,
   Status:{type:Number,default:0},
   total_call_count:Number,
+  isConvertable:Number,
   teacher_feedback:{type:Array,default:[]},
   allocateted_teacher:{type:Array,default:[]}
 });
