@@ -44,8 +44,6 @@ router.get('/getList/:teacher_id',(req,res)=>{
 });
 
 router.get('/list/:type',(req,res)=>{
-    if(err) {res.send(err)}
-    else{
         // 0 => unallocate 1 => allocate
         if(req.params.type == "0" || req.params.type == 0 ){
             studentModel.find({current_teacher:"000000000000000000000000"})
@@ -60,7 +58,6 @@ router.get('/list/:type',(req,res)=>{
                 else res.send(data)
             })
         }
-    }
 });
 
 router.get('/updateInfo/:student_id',(req,res)=>{
