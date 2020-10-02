@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
+const { StepInstance } = require('twilio/lib/rest/studio/v1/flow/engagement/step');
 
-// 0=>initiate 1 => accept ; 2 => modrate ; 3 => reject
-// teacher response 
+// 0=>initiate 1 => accept ; 2 => modrate ; 3 => reject; 4 => intrested
+// teacher response
+// 1 => yes 0 => no 
 var Student = new mongoose.Schema({
   Name:String,
   PhoneNumber: String,
@@ -14,11 +16,15 @@ var Student = new mongoose.Schema({
   current_teacher:{type:String,default:"000000000000000000000000"},
   Catagory_history:{type:Array,default:[]},
   lastcall:Date,
-  Status:Number,
+  Status:{type:Number,default:0},
   total_call_count:Number,
+  departmentPreference:String,
+  isConvertable:Boolean,
+  isInterested:Boolean,
+  isConvertableMessage:String,
   teacher_feedback:{type:Array,default:[]},
   allocateted_teacher:{type:Array,default:[]}
-});
+},{strict:false});
 
 // Delete model definition in case it is already defined
 delete mongoose.models.student;

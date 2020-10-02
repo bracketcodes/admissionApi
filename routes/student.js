@@ -52,7 +52,7 @@ router.get('/list/:type',(req,res)=>{
                 else res.send(data)
             })
         }else if(req.params.type == "1" || req.params.type == 1 ){
-            studentModel.find({current_teacher:{ $ne: "000000000000000000000000" }})
+            studentModel.aggregate({ $match : {current_teacher:{ $ne: "000000000000000000000000" }} })
             .exec((err,data)=>{
                 if(err) res.send(err)
                 else res.send(data)
@@ -61,13 +61,44 @@ router.get('/list/:type',(req,res)=>{
 });
 
 router.get('/updateInfo/:student_id',(req,res)=>{
-    studentModel.findByIdAndUpdate({_id:req.params.student_id},{$set:req.body})
+   if(Object.Keys(req.body).length){
+
+    let pushoptions = {};
+    let setOption = {};
+
+
+    (req.body.Catagory) ? setOption['Catagory'] = req.body.Catagory : console.log("no Catagory")
+    (req.body.callduration) ? setOption['callduration'] = req.body.callduration : console.log("no Catagory")
+    (req.body.lastcall) ? setOption['lastcall'] = req.body.lastcall : console.log("no Catagory")
+    (req.body.Status) ? setOption['Status'] = req.body.Status : console.log("no Catagory");
+    (req.body.isConvertable) ? setOption['isConvertable'] = req.body.isConvertable : console.log("no Catagory");
+    
+    (req.body.departmentPreference) ? setOption['departmentPreference'] = req.body.departmentPreference : "";
+    (req.body.isInterested) ? setOption['isInterested'] = req.body.isInterested : false;
+    (req.body.isConvertableMessage) ? setOption['isConvertableMessage'] = req.body.isConvertableMessage : "";
+
+    // (req.body.current_teacher) ? setOption['current_teacher'] = req.body.current_teacher : console.log("no Catagory")
+
+
+
+
+
+    (req.body.Message) ? pushoptions['Message'] = req.body.Message : "";
+    (req.body.teacher_feedback) ? pushoptions['teacher_feedback'] = req.body.teacher_feedback : "";
+    (req.body.Catagory) ? setOption['Catagory_history'] = req.body.Catagory : ""
+
+    (req.body.current_teacher && req.body.current_teacher != "000000000000000000000000") ? pushoptions['allocateted_teacher'] = req.body.current_teacher : console.log("no Catagory")
+
+    studentModel.findOneAndUpdate({ "_id": mongoose.Types.ObjectId(req.params.student_id) }, { $set: setoptions, $push: pushoptions },{ $inc: { Count:1} })
+
+    // studentModel.findByIdAndUpdate({_id:req.params.student_id},{$set:req.body})
     .exec((err,data)=>{
         if(err){res.json({msg:err});}
         else{
         res.json(data)
         }
     })
+}
 });
 
 
