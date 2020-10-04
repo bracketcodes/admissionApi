@@ -25,6 +25,25 @@ router.get('/getList',(req,res)=>{
         res.json(data)
         }
     })
+});
+
+router.post('/login',(req,res)=>{
+    var regex = new RegExp(["^", req.body.name, "$"].join(""), "i");
+    if(Object.keys(req.body).length){
+    teacherModel.find({ $and:[{PhoneNumber: req.body.PhoneNumber},{password:req.body.password}] })
+    .exec((err,data)=>{
+        if(err) res.send(err)
+        else
+           if(data.length > 1){
+               res.send(data)
+           }else{
+               res.send("login fail")
+           }
+
+    })
+    }else{
+        res.send("empty")
+    }
 })
 // allocating teacher
 router.post('/allocate/:teacher_id',(req,res)=>{

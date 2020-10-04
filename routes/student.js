@@ -50,7 +50,7 @@ router.get('/converted',(req,res)=>{
         res.json(data)
         }
     })
-})
+});
 
 router.get('/interested',(req,res)=>{
     studentModel.find({isInterested:true})
@@ -60,7 +60,7 @@ router.get('/interested',(req,res)=>{
         res.json(data)
         }
     })
-})
+});
 router.get('/list/:type',(req,res)=>{
         // 0 => unallocate 1 => allocate
         if(req.params.type == "0" || req.params.type == 0 ){
