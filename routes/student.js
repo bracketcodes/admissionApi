@@ -61,6 +61,17 @@ router.get('/interested',(req,res)=>{
         }
     })
 });
+
+router.get('/getTeacherHistory/:teacher_id',(req,res)=>{
+    studentModel.find({ teacher_feedback: { $elemMatch: { teacher_id: req.params.teacher_id } } })
+    .count()
+    .exec((err,data)=>{
+        if(err){res.json({msg:err});}
+        else{
+        res.json(data)
+        }
+    })
+});
 router.get('/list/:type',(req,res)=>{
         // 0 => unallocate 1 => allocate
         if(req.params.type == "0" || req.params.type == 0 ){
@@ -73,7 +84,7 @@ router.get('/list/:type',(req,res)=>{
             console.log("sdkjfb")
             studentModel.aggregate([{ $match : {current_teacher:{ $ne: "000000000000000000000000" }}},
             { "$addFields": { "current_teacherId": { "$toObjectId": "$current_teacher" } } },
-                        { $lookup: { from: "teachers", localField: "current_teacherId", foreignField: "_id", as: "details" } }])
+            { $lookup: { from: "teachers", localField: "current_teacherId", foreignField: "_id", as: "details" } }])
             .exec((err,data)=>{
                 if(err) res.send(err)
                 else res.send(data)
