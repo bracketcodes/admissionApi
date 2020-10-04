@@ -81,7 +81,7 @@ router.get('/list/:type',(req,res)=>{
         }
 });
 
-router.get('/updateInfo/:student_id',(req,res)=>{
+router.post('/updateInfo/:student_id',(req,res)=>{
    if(Object.Keys(req.body).length){
 
     let pushoptions = {};
