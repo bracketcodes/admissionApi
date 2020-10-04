@@ -42,7 +42,25 @@ router.get('/getList/:teacher_id',(req,res)=>{
         }
     })
 });
+router.get('/converted',(req,res)=>{
+    studentModel.find({isConvertable:true})
+    .exec((err,data)=>{
+        if(err){res.json({msg:err});}
+        else{
+        res.json(data)
+        }
+    })
+});
 
+router.get('/interested',(req,res)=>{
+    studentModel.find({isInterested:true})
+    .exec((err,data)=>{
+        if(err){res.json({msg:err});}
+        else{
+        res.json(data)
+        }
+    })
+});
 router.get('/list/:type',(req,res)=>{
         // 0 => unallocate 1 => allocate
         if(req.params.type == "0" || req.params.type == 0 ){
@@ -52,7 +70,10 @@ router.get('/list/:type',(req,res)=>{
                 else res.send(data)
             })
         }else if(req.params.type == "1" || req.params.type == 1 ){
-            studentModel.aggregate({ $match : {current_teacher:{ $ne: "000000000000000000000000" }} })
+            console.log("sdkjfb")
+            studentModel.aggregate([{ $match : {current_teacher:{ $ne: "000000000000000000000000" }}},
+            { "$addFields": { "current_teacherId": { "$toObjectId": "$current_teacher" } } },
+                        { $lookup: { from: "teachers", localField: "current_teacherId", foreignField: "_id", as: "details" } }])
             .exec((err,data)=>{
                 if(err) res.send(err)
                 else res.send(data)
