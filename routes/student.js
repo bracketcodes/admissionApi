@@ -51,6 +51,16 @@ router.get('/converted',(req,res)=>{
         }
     })
 })
+
+router.get('/interested',(req,res)=>{
+    studentModel.find({isInterested:true})
+    .exec((err,data)=>{
+        if(err){res.json({msg:err});}
+        else{
+        res.json(data)
+        }
+    })
+})
 router.get('/list/:type',(req,res)=>{
         // 0 => unallocate 1 => allocate
         if(req.params.type == "0" || req.params.type == 0 ){
