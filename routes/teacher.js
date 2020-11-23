@@ -29,12 +29,14 @@ router.get('/getList',(req,res)=>{
 
 router.post('/login',(req,res)=>{
     var regex = new RegExp(["^", req.body.name, "$"].join(""), "i");
+    console.log(req.body)
     if(Object.keys(req.body).length){
     teacherModel.find({ $and:[{PhoneNumber: req.body.PhoneNumber},{password:req.body.password}] })
     .exec((err,data)=>{
         if(err) res.send(err)
         else
-           if(data.length > 1){
+            console.log(data.length)
+           if(data.length > 0){
                res.send(data)
            }else{
                res.send("login fail")
