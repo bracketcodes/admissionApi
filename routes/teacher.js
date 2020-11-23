@@ -3,13 +3,38 @@ const router = express.Router();
 const twilio = require('twilio');
 const studentModel = require('../models/student.model');
 const teacherModel = require('../models/teacher.model');
-
+const csvtojson = require("csvtojson");
 const mongoose = require('mongoose');
 
 
 const config = require('../config');
 
+router.get('/uploadTeacher/:URL_link',(req,res)=>{
+    csvtojson()
+  .fromFile(req.params.URL_link)
+  .then(csvData => {
+    console.log(csvData);
+    teacherModel.insertMany(csvData, (err, res) => {
+        if (err) throw err;
+        console.log(`Inserted: ${res.insertedCount} rows`);
+        res.send(res.insertedCount)
+      });
+  });
+});
 
+
+router.get('/uploadStudent/:URL_link',(req,res)=>{
+    csvtojson()
+  .fromFile(req.params.URL_link)
+  .then(csvData => {
+    console.log(csvData);
+    studentModel.insertMany(csvData, (err, res) => {
+        if (err) throw err;
+        console.log(`Inserted: ${res.insertedCount} rows`);
+        res.send(res.insertedCount)
+      });
+  });
+});
 router.post('/add',(req,res)=>{
     let techerModel = new teacherModel(req.body)
     techerModel.save((err,data)=>{
@@ -41,7 +66,6 @@ router.post('/login',(req,res)=>{
            }else{
                res.send("login fail")
            }
-
     })
     }else{
         res.send("empty")

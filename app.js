@@ -17,6 +17,8 @@ var student = require('./routes/student');
 var dashboard = require('./routes/dashboard');
 var tickets = require('./routes/tickets');
 var token = require('./routes/token');
+var upload = require('./routes/upload_media');
+
 var cors = require('cors');
 // const student = require('./models/student.model');
 
@@ -59,6 +61,9 @@ app.use('/token', token);
 app.use('/listOfStudent/:teacher_id', token);
 app.use('/api/student',student)
 app.use('/api/teacher',teacher)
+app.use('/api/media',upload)
+
+
 // app.use('/api/admin',admin)
 
 

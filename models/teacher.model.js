@@ -10,7 +10,7 @@ var Teacher = new mongoose.Schema({
   lastcallat:Date,
   cureent_allocate_teacher:String,
   allocateted_teachers:Array
-});
+},{strict:false});
 
 // Delete model definition in case it is already defined
 delete mongoose.models.teacher;
