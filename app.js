@@ -60,7 +60,7 @@ app.use('/tickets', tickets);
 app.use('/token', token);
 app.use('/listOfStudent/:teacher_id', token);
 app.use('/api/student',student)
-app.use('/api/teahcer',teacher)
+app.use('/api/teacher',teacher)
 app.use('/api/media',upload)
 
 
