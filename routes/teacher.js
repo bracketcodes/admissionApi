@@ -23,7 +23,17 @@ router.get('/uploadTeacher/:URL_link',(req,res)=>{
   });
 });
 
-
+router.post('/test',(req,res)=>{
+    console.log("confirm")
+    if(req.body["vendor_id"] && "vendor_id" in req.body )
+    {
+        // if(){
+        res.send(true)
+        // }
+    }else{
+        res.send(false)
+    }
+})
 router.get('/uploadStudent/:URL_link',(req,res)=>{
     csvtojson()
   .fromFile(req.params.URL_link)

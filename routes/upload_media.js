@@ -62,7 +62,7 @@ const upload_profile = multer({ storage: storage }).single('data');
 
     router.post('/listOfvideo',(req,res)=>{
         fs.readdir(dir, (error, fileNames) => {
-            if (error) res.send(err);
+            if (error) res.send(error);
             else if(fileNames){
             fileNames.forEach(filename => {
               // get current file name
