@@ -56,8 +56,8 @@ router.post('/add_csv', (req, res) => {
                     if (csvData[0].hasOwnProperty('PhoneNumber')) {
                         studentModel.insertMany(csvData, (err, response) => {
                             if (err) res.send(err);
-                            console.log(`Inserted: ${typeof response} rows`);
-                            res.json({'total rocard':total,'inserted':response})
+                            console.log(`Inserted: ${response.length} rows`);
+                            res.json({'total rocard':total,'inserted':response.length})
                         });
                     } else {
                         res.send("phone number is required")
