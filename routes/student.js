@@ -124,6 +124,7 @@ router.get('/getTeacherHistory/:teacher_id', (req, res) => {
         })
 });
 router.get('/list/:type', (req, res) => {
+    console.log("enter");
     // 0 => unallocate 1 => allocate
     if (req.params.type == "0" || req.params.type == 0) {
         studentModel.find({ current_teacher: "000000000000000000000000" })

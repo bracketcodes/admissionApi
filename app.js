@@ -27,9 +27,22 @@ var app = express();
 app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'pug');
+app.set('view engine', 'pug');
+
 app.engine('html',require('ejs').renderFile);
 app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public/build')));
+
+// function getRoot(request, response) {
+//   response.sendFile(path.resolve('./public/build/index.html'));
+// }
+
+// app.get('/dev', getRoot);
+// // catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -37,19 +50,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public/build')));
-
-function getRoot(request, response) {
-  response.sendFile(path.resolve('./public/build/index.html'));
-}
-
-app.get('/', getRoot);
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-
 app.use(session({
     secret: 'secret',
     name: 'browser-calls',
@@ -57,7 +57,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
 // middleware for flash message handling
@@ -75,7 +75,7 @@ app.use('/tickets', tickets);
 app.use('/token', token);
 app.use('/listOfStudent/:teacher_id', token);
 app.use('/api/student',student)
-app.use('/api/teacher',teacher)
+app.use('/api/teahcer',teacher)
 app.use('/api/media',upload)
 
 
